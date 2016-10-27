@@ -18,6 +18,7 @@ import java.util.Calendar;
 import java.util.List;
 
 public abstract class MonthView extends View {
+
     protected int NUM_COLUMNS = 7;
     protected int NUM_ROWS = 6;
     protected Paint paint;
@@ -102,6 +103,7 @@ public abstract class MonthView extends View {
             daysString[row][column] = day + 1;
             drawBG(canvas, column, row, daysString[row][column]);
             drawDecor(canvas, column, row, year, month, daysString[row][column]);
+            drawRest(canvas, column, row, year, month, daysString[row][column]);
             drawText(canvas, column, row, year, month, daysString[row][column]);
         }
         canvas.restore();
@@ -117,6 +119,8 @@ public abstract class MonthView extends View {
     protected abstract void drawBG(Canvas canvas, int column, int row, int day);
 
     protected abstract void drawDecor(Canvas canvas, int column, int row, int year, int month, int day);
+
+    protected abstract void drawRest(Canvas canvas, int column, int row, int year, int month, int day);
 
     protected abstract void drawText(Canvas canvas, int column, int row, int year, int month, int day);
 
@@ -224,7 +228,7 @@ public abstract class MonthView extends View {
      * @param day
      * @return
      */
-    protected String iscalendarInfo(int year, int month, int day) {
+    protected String isCalendarInfo(int year, int month, int day) {
         if (calendarInfos == null || calendarInfos.size() == 0) return "";
         for (CalendarInfo calendarInfo : calendarInfos) {
             if (calendarInfo.day == day && calendarInfo.month == month + 1 && calendarInfo.year == year) {
@@ -232,6 +236,16 @@ public abstract class MonthView extends View {
             }
         }
         return "";
+    }
+
+    protected int calendarBgColor(int year, int month, int day) {
+        if (calendarInfos == null || calendarInfos.size() == 0) return 0;
+        for (CalendarInfo calendarInfo : calendarInfos) {
+            if (calendarInfo.day == day && calendarInfo.month == month + 1 && calendarInfo.year == year) {
+                return calendarInfo.rest;
+            }
+        }
+        return 0;
     }
 
     /**

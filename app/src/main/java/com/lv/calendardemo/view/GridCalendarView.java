@@ -26,7 +26,6 @@ public class GridCalendarView extends LinearLayout implements View.OnClickListen
         View view = LayoutInflater.from(context).inflate(R.layout.display_grid_date, null);
         gridMonthView = new GridMonthView(context, null);
         addView(view, llParams);
-        //addView(weekView,llParams);
         addView(gridMonthView, llParams);
 
         view.findViewById(R.id.left).setOnClickListener(this);

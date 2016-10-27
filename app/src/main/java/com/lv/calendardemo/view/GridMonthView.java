@@ -7,7 +7,9 @@ import android.graphics.Path;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 
+import com.lv.calendardemo.entity.CalendarInfo;
 import com.lv.calendardemo.theme.DefaultDayTheme;
+
 
 public class GridMonthView extends MonthView {
 
@@ -62,8 +64,24 @@ public class GridMonthView extends MonthView {
     @Override
     protected void drawDecor(Canvas canvas, int column, int row, int year, int month, int day) {
         if (calendarInfos != null && calendarInfos.size() > 0) {
-            if (TextUtils.isEmpty(iscalendarInfo(year, month, day))) return;
-            paint.setColor(theme.colorDecor());
+            if (TextUtils.isEmpty(isCalendarInfo(year, month, day))) return;
+            switch (calendarBgColor(year, month, day)) {
+                case CalendarInfo.COLOR_ORANGE:
+                    paint.setColor(theme.colorOrange());
+                    break;
+                case CalendarInfo.COLOR_GREEN:
+                    paint.setColor(theme.colorGreen());
+                    break;
+                case CalendarInfo.COLOR_YELLOW:
+                    paint.setColor(theme.colorYellow());
+                    break;
+                case CalendarInfo.COLOR_BLUE:
+                    paint.setColor(theme.colorBlue());
+                    break;
+                case CalendarInfo.COLOR_PURPLE:
+                    paint.setColor(theme.colorPurple());
+                    break;
+            }
             paint.setStyle(Paint.Style.FILL);
             float startRecX = columnSize * column + 1;
             float startRecY = rowSize * row + 1;
@@ -74,45 +92,36 @@ public class GridMonthView extends MonthView {
     }
 
     @Override
+    protected void drawRest(Canvas canvas, int column, int row, int year, int month, int day) {
+        if (calendarInfos != null && calendarInfos.size() > 0) {
+            for (CalendarInfo calendarInfo : calendarInfos) {
+                if (calendarInfo.day == day && calendarInfo.year == year && calendarInfo.month == month + 1) {
+                    paint.setStyle(Paint.Style.FILL);
+                    paint.setTextSize(theme.sizeDesc());
+                    paint.setColor(theme.colorSelectDay());
+                }
+            }
+        }
+    }
+
+    @Override
     protected void drawText(Canvas canvas, int column, int row, int year, int month, int day) {
         paint.setTextSize(theme.sizeDay());
         float startX = columnSize * column + (columnSize - paint.measureText(day + "")) / 2;
         float startY = rowSize * row + rowSize / 2 - (paint.ascent() + paint.descent()) / 2;
         paint.setStyle(Paint.Style.STROKE);
-        String des = iscalendarInfo(year, month, day);
-        if (day == selDay) {//日期为选中的日期
-            if (!TextUtils.isEmpty(des)) {//desc不为空的时候
-                int dateY = (int) (startY - 10);
-                paint.setColor(theme.colorSelectDay());
-                canvas.drawText(day + "", startX, dateY, paint);
-
-                paint.setTextSize(theme.sizeDesc());
-                int priceX = (int) (columnSize * column + (columnSize - paint.measureText(des)) / 2);
-                int priceY = (int) (startY + 15);
-                canvas.drawText(des, priceX, priceY, paint);
-            } else {//des为空的时候
-                paint.setColor(theme.colorSelectDay());
-                canvas.drawText(day + "", startX, startY, paint);
-            }
-        } else if (day == currDay && currDay != selDay && currMonth == selMonth) {//今日的颜色，不是选中的时候
-            //正常月，选中其他日期，则今日为红色
-            paint.setColor(theme.colorToday());
+        String des = isCalendarInfo(year, month, day);
+        if (!TextUtils.isEmpty(des)) {//没选中，但是desc不为空
+            int dateY = (int) (startY - 10);
+            canvas.drawText(day + "", startX, dateY, paint);
+            paint.setTextSize(theme.sizeDesc());
+            paint.setColor(theme.colorSelectDay());
+            int priceX = (int) (columnSize * column + Math.abs((columnSize - paint.measureText(des)) / 2));
+            int priceY = (int) (startY + 15);
+            canvas.drawText(des, priceX, priceY, paint);
+        } else {//des为空
+            paint.setColor(theme.colorWeekday());
             canvas.drawText(day + "", startX, startY, paint);
-        } else {
-            if (!TextUtils.isEmpty(des)) {//没选中，但是desc不为空
-                int dateY = (int) (startY - 10);
-                paint.setColor(theme.colorWeekday());
-                canvas.drawText(day + "", startX, dateY, paint);
-
-                paint.setTextSize(theme.sizeDesc());
-                paint.setColor(theme.colorDesc());
-                int priceX = (int) (columnSize * column + Math.abs((columnSize - paint.measureText(des)) / 2));
-                int priceY = (int) (startY + 15);
-                canvas.drawText(des, priceX, priceY, paint);
-            } else {//des为空
-                paint.setColor(theme.colorWeekday());
-                canvas.drawText(day + "", startX, startY, paint);
-            }
         }
     }
 
