@@ -25,11 +25,6 @@ public class DefaultDayTheme implements IDayTheme {
     }
 
     @Override
-    public int colorDecor() {
-        return Color.parseColor("#68CB00");
-    }
-
-    @Override
     public int colorWork() {
         return Color.parseColor("#FF9B12");
     }
@@ -62,30 +57,5 @@ public class DefaultDayTheme implements IDayTheme {
     @Override
     public int smoothMode() {
         return 0;
-    }
-
-    @Override
-    public int colorOrange() {
-        return Color.parseColor("#F6AC2B");
-    }
-
-    @Override
-    public int colorGreen() {
-        return Color.parseColor("#69C2B1");
-    }
-
-    @Override
-    public int colorYellow() {
-        return Color.parseColor("#EADB00");
-    }
-
-    @Override
-    public int colorBlue() {
-        return Color.parseColor("#5E97BE");
-    }
-
-    @Override
-    public int colorPurple() {
-        return Color.parseColor("#925DA3");
     }
 }

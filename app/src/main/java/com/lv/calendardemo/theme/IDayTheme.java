@@ -30,13 +30,6 @@ public interface IDayTheme {
     public int colorWeekday();
 
     /**
-     * 事务装饰颜色
-     *
-     * @return 16进制颜色值 hex color
-     */
-    public int colorDecor();
-
-    /**
      * 班颜色
      *
      * @return 16进制颜色值 hex color
@@ -84,39 +77,4 @@ public interface IDayTheme {
      * @return
      */
     public int smoothMode();
-
-    /**
-     * 橙色
-     *
-     * @return
-     */
-    public int colorOrange();
-
-    /**
-     * 绿色
-     *
-     * @return
-     */
-    public int colorGreen();
-
-    /**
-     * 黄色
-     *
-     * @return
-     */
-    public int colorYellow();
-
-    /**
-     * 蓝色
-     *
-     * @return
-     */
-    public int colorBlue();
-
-    /**
-     * 紫色
-     *
-     * @return
-     */
-    public int colorPurple();
 }

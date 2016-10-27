@@ -65,23 +65,7 @@ public class GridMonthView extends MonthView {
     protected void drawDecor(Canvas canvas, int column, int row, int year, int month, int day) {
         if (calendarInfos != null && calendarInfos.size() > 0) {
             if (TextUtils.isEmpty(isCalendarInfo(year, month, day))) return;
-            switch (calendarBgColor(year, month, day)) {
-                case CalendarInfo.COLOR_ORANGE:
-                    paint.setColor(theme.colorOrange());
-                    break;
-                case CalendarInfo.COLOR_GREEN:
-                    paint.setColor(theme.colorGreen());
-                    break;
-                case CalendarInfo.COLOR_YELLOW:
-                    paint.setColor(theme.colorYellow());
-                    break;
-                case CalendarInfo.COLOR_BLUE:
-                    paint.setColor(theme.colorBlue());
-                    break;
-                case CalendarInfo.COLOR_PURPLE:
-                    paint.setColor(theme.colorPurple());
-                    break;
-            }
+            paint.setColor(calendarBgColor(year, month, day));
             paint.setStyle(Paint.Style.FILL);
             float startRecX = columnSize * column + 1;
             float startRecY = rowSize * row + 1;

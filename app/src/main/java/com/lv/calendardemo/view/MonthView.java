@@ -239,7 +239,6 @@ public abstract class MonthView extends View {
     }
 
     protected int calendarBgColor(int year, int month, int day) {
-        if (calendarInfos == null || calendarInfos.size() == 0) return 0;
         for (CalendarInfo calendarInfo : calendarInfos) {
             if (calendarInfo.day == day && calendarInfo.month == month + 1 && calendarInfo.year == year) {
                 return calendarInfo.rest;

@@ -1,12 +1,14 @@
 package com.lv.calendardemo.entity;
 
+import android.graphics.Color;
+
 public class CalendarInfo {
 
-    public static final int COLOR_ORANGE = 1;// #F6AC2B
-    public static final int COLOR_GREEN = 2;// #69C2B1
-    public static final int COLOR_YELLOW = 3;// #EADB00
-    public static final int COLOR_BLUE = 4;// #5E97BE
-    public static final int COLOR_PURPLE = 5;// #925DA3
+    public static final int COLOR_ORANGE = Color.parseColor("#F6AC2B");// #F6AC2B
+    public static final int COLOR_GREEN = Color.parseColor("#69C2B1");// #69C2B1
+    public static final int COLOR_YELLOW = Color.parseColor("#EADB00");// #EADB00
+    public static final int COLOR_BLUE = Color.parseColor("#5E97BE");// #5E97BE
+    public static final int COLOR_PURPLE = Color.parseColor("#925DA3");// #925DA3
 
     /**
      * 年
