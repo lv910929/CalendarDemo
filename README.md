@@ -19,6 +19,7 @@
 使用自定义样式就需要分别继承实现日期和周的样式，然后通过方法进行设置。设置日期日历界面的样式 calendarView.setDayTheme(new IDayTheme());
 
 其他功能：
+
 1、 支持点击事件
 ``` 
 calendarView.setDateClick(new MonthView.IDateClick() {
